@@ -3,65 +3,102 @@
 <head>
     <meta charset="UTF-8">
     <title>📰 Fake News Detector</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
     <style>
+        * {
+            box-sizing: border-box;
+        }
         body {
             font-family: 'Roboto', sans-serif;
-            background-color:rgb(224, 235, 246);
+            background-color: rgb(224, 235, 246);
+            margin: 0;
+            padding: 20px;
         }
-        .container {
+        .wrapper {
             max-width: 700px;
-            margin-top: 80px;
+            margin: 80px auto;
             padding: 30px;
-            background-color: #ffffff;
+            background-color: #fff;
             border-radius: 12px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
-        .form-control {
+        h2 {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 16px;
             resize: none;
         }
-        .btn-primary {
+        button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 20px;
             background-color: #0d6efd;
-            border-color: #0d6efd;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
         }
-        .btn-primary:hover {
+        button:hover {
             background-color: #0b5ed7;
-            border-color: #0a58ca;
         }
         .result {
-            margin-top: 20px;
+            margin-top: 24px;
+            padding: 16px;
+            border-radius: 6px;
+            color: #fff;
+        }
+        .alert-danger {
+            background-color: #dc3545;
+        }
+        .alert-success {
+            background-color: #28a745;
         }
         .result span {
             font-weight: bold;
+        }
+        .resource-links {
+            margin-top: 30px;
+        }
+        .resource-links h5 {
+            margin-bottom: 10px;
+        }
+        .resource-links ul {
+            padding-left: 20px;
         }
         .footer {
             margin-top: 50px;
             text-align: center;
             color: #6c757d;
         }
-        .resource-links {
-            margin-top: 30px;
-        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h2 class="text-center mb-4">📰 Fake News Detector</h2>
+    <div class="wrapper">
+        <h2>📰 Fake News Detector</h2>
         <form method="POST">
-            <div class="mb-3">
-                <label for="news" class="form-label">Enter News Text (use newpapers or articles) :</label>
-                <textarea class="form-control" id="news" name="news" rows="6" placeholder="Type or paste the news article here..."></textarea>
+            <div>
+                <label for="news">Enter News Text (use newspapers or articles):</label>
+                <textarea id="news" name="news" rows="6" placeholder="Type or paste the news article here..."></textarea>
             </div>
-            <div class="d-grid">
-                <button type="submit" class="btn btn-primary">Check Authenticity</button>
-            </div>
+            <button type="submit">Check Authenticity</button>
         </form>
 
         {% if prediction %}
-        <div class="result alert {% if prediction == 'FAKE' %}alert-danger{% else %}alert-success{% endif %}" role="alert">
+        <div class="result {% if prediction == 'FAKE' %}alert-danger{% else %}alert-success{% endif %}">
             Prediction: <span>{{ prediction }}</span><br>
             Confidence: <span>{{ confidence }}%</span>
         </div>
@@ -79,8 +116,5 @@
     <div class="footer">
         <p>&copy; 2025 Fake News Detector. All rights reserved.</p>
     </div>
-
-    <!-- Bootstrap JS Bundle -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
