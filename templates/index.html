@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>📰 Fake News Detector</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color:rgb(224, 235, 246);
+        }
+        .container {
+            max-width: 700px;
+            margin-top: 80px;
+            padding: 30px;
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        .form-control {
+            resize: none;
+        }
+        .btn-primary {
+            background-color: #0d6efd;
+            border-color: #0d6efd;
+        }
+        .btn-primary:hover {
+            background-color: #0b5ed7;
+            border-color: #0a58ca;
+        }
+        .result {
+            margin-top: 20px;
+        }
+        .result span {
+            font-weight: bold;
+        }
+        .footer {
+            margin-top: 50px;
+            text-align: center;
+            color: #6c757d;
+        }
+        .resource-links {
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 class="text-center mb-4">📰 Fake News Detector</h2>
+        <form method="POST">
+            <div class="mb-3">
+                <label for="news" class="form-label">Enter News Text (use newpapers or articles) :</label>
+                <textarea class="form-control" id="news" name="news" rows="6" placeholder="Type or paste the news article here..."></textarea>
+            </div>
+            <div class="d-grid">
+                <button type="submit" class="btn btn-primary">Check Authenticity</button>
+            </div>
+        </form>
+
+        {% if prediction %}
+        <div class="result alert {% if prediction == 'FAKE' %}alert-danger{% else %}alert-success{% endif %}" role="alert">
+            Prediction: <span>{{ prediction }}</span><br>
+            Confidence: <span>{{ confidence }}%</span>
+        </div>
+        {% endif %}
+
+        <div class="resource-links">
+            <h5>🔗 Resources</h5>
+            <ul>
+                <li><a href="https://www.kaggle.com/datasets/vivek1coder/fakenewsdetection" target="_blank">Fake News Detection Dataset</a></li>
+                <li><a href="https://github.com/Vivek1-coder/fake-news-detection-lstm-cnn" target="_blank">Code Repository</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2025 Fake News Detector. All rights reserved.</p>
+    </div>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
